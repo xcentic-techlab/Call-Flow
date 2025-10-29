@@ -4,12 +4,10 @@ import User from "../models/TempUser.js";
 
 const router = express.Router();
 
-// Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
 };
 
-// SignUp
 router.post("/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -28,7 +26,6 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// SignIn
 router.post("/signin", async (req, res) => {
   try {
     const { email, password } = req.body;

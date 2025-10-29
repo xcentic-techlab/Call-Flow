@@ -3,7 +3,7 @@ import { Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/contexts/useAuth';
 import { toast } from 'sonner';
 import { Spinner } from './Spinner';
 
@@ -28,18 +28,14 @@ export const CallForm = () => {
     setIsLoading(true);
 
     try {
-const response = await fetch("/api/call/singleCall", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    ...(token && { Authorization: `Bearer ${token}` }),
-  },
-  body: JSON.stringify({ phone_number: `+91${phone_number}` }),
-});
-
-
-
-
+      const response = await fetch("/api/call/singleCall", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
+        body: JSON.stringify({ phone_number: `+91${phone_number}` }),
+      });
       const data = await response.json();
 
       if (response.ok) {
@@ -63,7 +59,7 @@ const response = await fetch("/api/call/singleCall", {
       onSubmit={handleSubmit}
       className="p-6 border border-white/[0.08] rounded-2xl bg-background/40 shadow-sm space-y-6 max-w-md mx-auto text-center"
     >
-      {/* 🌈 Gradient Heading */}
+
       <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-6">
         Place a Call
       </h2>

@@ -2,8 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import {
   Phone,
   Users,
-  Database,
-  BarChart3,
   ShieldCheck,
   ArrowRight,
   PhoneCall,
@@ -20,15 +18,11 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <DashboardHeader />
 
       <main className="container mx-auto px-4 md:px-6 py-8 md:py-12 space-y-12">
-        {/* ================= HERO SECTION ================= */}
         <div className="grid lg:grid-cols-2 items-center rounded-3xl overflow-hidden">
-          {/* Left Section */}
           <div className="p-8 md:p-12 lg:p-16 space-y-6">
-            {/* Heading */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
               Manage Your{' '}
               <span className="bg-gradient-to-r from-primary via-emerald-500 to-secondary bg-clip-text text-transparent">
@@ -37,13 +31,10 @@ const Dashboard = () => {
               & Seamlessly
             </h1>
 
-            {/* Description */}
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
               Initiate single or bulk calls, monitor call activity, and manage
               all your communication from one secure dashboard.
             </p>
-
-            {/* Feature Pills */}
             <div className="flex flex-wrap gap-3 pt-2">
               <div className="flex items-center gap-2 px-4 py-2 bg-background rounded-full border border-border shadow-sm">
                 <ShieldCheck className="h-4 w-4 text-primary" />
@@ -56,7 +47,6 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
                 onClick={() => navigate('/call')}
@@ -70,7 +60,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Right Section (Image) */}
           <div className="relative flex justify-center items-center h-full">
             <img
               src={dashboardHero}
@@ -94,10 +83,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* ================= STATS SECTION ================= */}
         <StatsGrid />
 
-        {/* ================= ABOUT SECTION ================= */}
         <section className="text-center">
           <div className="mb-8">
             <h3 className="text-3xl md:text-4xl font-bold mb-3">
@@ -108,7 +95,6 @@ const Dashboard = () => {
             </p>
           </div>
 
-          {/* Info Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <InfoCard
               title="One-Click Calling"

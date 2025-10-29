@@ -1,109 +1,75 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { AuthContextType, User } from "@/types/auth";
+import { authApi } from "@/api/authApi";
+import { storage } from "@/utils/storage";
 
-interface User {
-  _id?: string;
-  name: string;
-  email: string;
-}
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  signin: (email: string, password: string) => Promise<void>;
-  signup: (name: string, email: string, password: string) => Promise<void>;
-  logout: () => void;
-  isLoading: boolean;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-const API_BASE = "http://localhost:8000/api"; // ✅ change this if backend URL differs
-
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load user + token from localStorage on mount
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken");
-    const storedUser = localStorage.getItem("authUser");
-    if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
+    try {
+      const storedToken = storage.get<string>("authToken");
+      const storedUserRaw = storage.get<string>("authUser");
+
+      if (storedToken && storedUserRaw) {
+        let parsedUser: User;
+
+        if (typeof storedUserRaw === "object") {
+          parsedUser = storedUserRaw as User;
+        } else {
+          parsedUser = JSON.parse(storedUserRaw);
+        }
+
+        setToken(storedToken);
+        setUser(parsedUser);
+      }
+    } catch (error) {
+      console.error("Error reading user data from storage:", error);
+      storage.clearAuth();
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }, []);
 
-  // 🔹 Sign Up (real API)
   const signup = async (name: string, email: string, password: string) => {
     try {
-      const res = await fetch(`${API_BASE}/auth/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Signup failed");
-
-      localStorage.setItem("authToken", data.token);
-      localStorage.setItem("authUser", JSON.stringify(data));
-
+      const data = await authApi.signup(name, email, password);
+      storage.set("authToken", data.token);
+      storage.set("authUser", JSON.stringify({ name: data.name, email: data.email }));
       setToken(data.token);
       setUser({ name: data.name, email: data.email });
     } catch (err: any) {
-      alert(err.message);
       console.error("Signup error:", err);
+      alert(err.message);
     }
   };
 
-  // 🔹 Sign In (real API)
   const signin = async (email: string, password: string) => {
     try {
-      const res = await fetch(`${API_BASE}/auth/signin`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Signin failed");
-
-      localStorage.setItem("authToken", data.token);
-      localStorage.setItem("authUser", JSON.stringify(data));
-
+      const data = await authApi.signin(email, password);
+      storage.set("authToken", data.token);
+      storage.set("authUser", JSON.stringify({ name: data.name, email: data.email }));
       setToken(data.token);
       setUser({ name: data.name, email: data.email });
     } catch (err: any) {
-      alert(err.message);
       console.error("Signin error:", err);
+      alert(err.message);
     }
   };
 
-  // 🔹 Logout
   const logout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("authUser");
+    storage.clearAuth();
     setToken(null);
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider
-      value={{ user, token, signin, signup, logout, isLoading }}
-    >
+    <AuthContext.Provider value={{ user, token, signin, signup, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
 };
