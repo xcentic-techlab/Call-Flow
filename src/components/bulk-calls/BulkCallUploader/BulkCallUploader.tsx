@@ -22,6 +22,8 @@ export const BulkCallUploader = ({
   const [phoneNumbers, setPhoneNumbers] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const { token } = useAuth();
+  
+  const API_BASE = import.meta.env.VITE_API_BASE;
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -74,7 +76,8 @@ export const BulkCallUploader = ({
 
       console.log("Payload being sent:", payload);
 
-      const res = await fetch("http://localhost:8000/api/call/bulkCall", {
+      // ✅ Using env variable here instead of hardcoded localhost
+      const res = await fetch(`${API_BASE}/call/bulkCall`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +117,6 @@ export const BulkCallUploader = ({
         <p className="text-sm text-gray-400 pt-2 text-center">
           Upload an Excel file containing phone numbers and trigger calls in one go.
         </p>
-
       </div>
 
       <FileUploadSection onFileUpload={handleFileUpload} />

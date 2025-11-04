@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") || "http://localhost:8000/api";
+const API_BASE = import.meta.env.VITE_API_BASE?.replace(/\/$/, "");
 
 export async function getPrompts(token: string) {
   const res = await fetch(`${API_BASE}/prompts`, {

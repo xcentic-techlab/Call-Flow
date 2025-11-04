@@ -22,6 +22,8 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
   const [isLoading, setIsLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
 
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("handleSubmit triggered");
@@ -33,7 +35,7 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
     setIsLoading(true);
     try {
       console.log("Sending call request...");
-      const response = await fetch("http://localhost:8000/api/call/call", {
+      const response = await fetch(`${API_BASE}/call/call`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,6 +78,7 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
           Enter a phone number and initiate your business call instantly.
         </p>
       </div>
+
       <div className="space-y-2">
         <Label htmlFor="phoneNumber" className="text-gray-300">
           Customer Phone Number
@@ -94,6 +97,7 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
           />
         </div>
       </div>
+
       <Button
         type="submit"
         disabled={isLoading}
