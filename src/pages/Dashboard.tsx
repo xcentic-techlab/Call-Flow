@@ -10,7 +10,7 @@ import {
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { StatsGrid } from "@/components/StatsGrid";
 import { Button } from "@/components/ui/button";
-import { Footer } from "../pages/footer";
+import { Footer } from "./footer";
 
 const Dashboard = () => {
   const navigate = useNavigate();
