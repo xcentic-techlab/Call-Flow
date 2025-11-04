@@ -21,6 +21,10 @@ app.use(express.urlencoded({ extended: true }));
 
 connectDB();
 
+app.get("/", (req, res) => {
+  res.send("🚀 Backend is live on Railway!");
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/call", callRoutes);
 
