@@ -11,9 +11,13 @@ export function PromptsGrid({ prompts, onEdit, onCall }: PromptsGridProps) {
 
   if (keys.length === 0)
     return (
-      <p className="text-center text-muted-foreground mt-10">
-        No prompts available at the moment.
-      </p>
+      <div className="flex justify-center items-center mt-16">
+        <div className="bg-gray-400/10 border border-gray-700 rounded-2xl px-8 py-12 text-center shadow-md w-full max-w-md">
+          <p className="text-gray-300 text-lg font-medium">
+            No prompts available at the moment.
+          </p>
+        </div>
+      </div>
     );
 
   return (
