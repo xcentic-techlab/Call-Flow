@@ -25,8 +25,8 @@ app.get("/", (req, res) => {
   res.send("🚀 Backend is live on Railway!");
 });
 
-app.use("/api/auth", authRoutes);
-app.use("/api/call", callRoutes);
+app.use("api/auth", authRoutes);
+app.use("api/call", callRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT,() => console.log(`Server running on ${PORT}`));
