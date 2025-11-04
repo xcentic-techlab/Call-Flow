@@ -5,11 +5,11 @@ export function usePrompts() {
   const [prompts, setPrompts] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
 
-  const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE?.replace(/\/$/, "");
+  // const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE?.replace(/\/$/, "");
 
   const fetchPrompts = async () => {
     try {
-      const res = await fetch(`${API_BASE}/prompts`);
+      const res = await fetch("http://89.116.121.214:8000/prompts");
       const data = await res.json();
       setPrompts(data);
     } catch (error) {
@@ -22,7 +22,7 @@ export function usePrompts() {
 
   const updatePrompt = async (business: string, prompt: string) => {
     try {
-      const res = await fetch(`${API_BASE}/prompts/update`, {
+      const res = await fetch("http://89.116.121.214:8000/prompts/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ business_type: business, prompt }),

@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE;
+// const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE;
 
 const promptService = {
   getAllPrompts: async () => {
     try {
-      const response = await axios.get(`${API_BASE}/prompts`);
+      const response = await axios.get("http://89.116.121.214:8000/prompts");
       return response.data;
     } catch (error) {
       console.error("Error fetching prompts:", error);
@@ -14,7 +14,7 @@ const promptService = {
   },
   getPromptByBusinessType: async (businessType) => {
     try {
-      const response = await axios.get(`${API_BASE}/prompts/${businessType}`);
+      const response = await axios.get("http://89.116.121.214:8000/prompts/${businessType}");
       return response.data;
     } catch (error) {
       console.error("Error fetching prompt:", error);
@@ -23,7 +23,7 @@ const promptService = {
   },
   updatePrompt: async (businessType, prompt) => {
     try {
-      const response = await axios.post(`${API_BASE}/prompts/update`, {
+      const response = await axios.post("http://89.116.121.214:8000/prompts/update", {
         business_type: businessType,
         prompt,
       });

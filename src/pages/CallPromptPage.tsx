@@ -9,12 +9,12 @@ export default function CallPromptPage() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE?.replace(/\/$/, "");
+  // const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE?.replace(/\/$/, "");
 
   useEffect(() => {
     const fetchPrompt = async () => {
       try {
-        const res = await fetch(`${API_BASE}/prompts`);
+        const res = await fetch("http://89.116.121.214:8000/prompts");
         const data = await res.json();
         setPrompt(data[businessType as string] || "No prompt found.");
       } catch (err) {
