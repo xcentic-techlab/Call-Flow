@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       // 1️⃣ Local backend for call-related APIs
       "/api": {
-        target: "http://localhost:8000",
+        target: "https://balanced-renewal-production-e496.up.railway.app/",
         changeOrigin: true,
         secure: false,
       },
