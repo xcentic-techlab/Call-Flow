@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/Spinner";
 import { DashboardHeader } from "@/components/DashboardHeader";
@@ -27,34 +27,43 @@ export default function PromptsPage() {
 
   if (loading)
     return (
-      <div className="flex justify-center items-center min-h-screen bg-background">
-        <Spinner size="lg" />
-      </div>
+     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br bg-gray-900">
+      <Spinner size="lg" />
+    </div>
     );
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br bg-gray-900 text-white flex flex-col">
       <DashboardHeader />
 
-      <main className="flex-1 container mx-auto px-4 md:px-8 py-10">
-        <div className="mb-8">
-          <Button
-            variant="ghost"
-            onClick={() => navigate("/dashboard")}
-            className="hover:bg-muted/50 hover:scale-105 transition-all flex items-center gap-2"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Dashboard
-          </Button>
+      <main className="flex-1 container mx-auto px-4 md:px-8 py-10 ">
+       <div className="mb-10 mt-10">
+            <Button
+                variant="ghost"
+                onClick={() => navigate("/dashboard")}
+                className="hover:bg-gray-800/60 hover:scale-105 transition-all flex items-center gap-2 text-zinc-300 hover:text-white"
+            >
+                <ArrowLeft className="h-4 w-4" />
+                Back to Dashboard
+            </Button>
         </div>
-
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 bg-gradient-to-r from-purple-500 via-purple-500 to-purple-700 bg-clip-text text-transparent drop-shadow-sm">
-          Business Prompts
+        <div className="text-center mb-12 space-y-3">
+          <div className="flex justify-center">
+          </div>
+          <h1 className="text-3xl md:text-4xl font-extrabold drop-shadow-md text-center">
+            <span className="bg-gradient-to-r text-white bg-clip-text text-transparent">
+                Business
+            </span>{" "}
+            <span className="text-white">Prompts</span>
         </h1>
 
+          <p className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto">
+            Select calling prompts for different business categories.
+          </p>
+        </div>
         <PromptsGrid prompts={prompts} onEdit={handleEdit} onCall={handleMakeCall} />
-      </main>
 
+      </main>
       <EditPromptDialog
         open={open}
         business={selectedBusiness}

@@ -25,36 +25,44 @@ const Call = () => {
   }, [location.state]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b bg-gray-900 text-white">
       <DashboardHeader />
 
-      <main className="container mx-auto px-4 md:px-6 py-10">
-        {/* 🔙 Back Button */}
-        <Button
-          variant="ghost"
-          onClick={() => navigate("/prompts")}
-          className="mb-8 hover:bg-muted/50 hover:scale-105 transition-all"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Prompts
-        </Button>
-
-        <Card className="mb-8 border-purple-500/30 bg-card/60 backdrop-blur-sm">
-          <CardContent className="p-6 space-y-3">
-            <h2 className="text-xl font-semibold capitalize text-purple-400">
-              Business Type: <span className="text-foreground">{prefill.business_type}</span>
-            </h2>
-            <p className="text-sm text-muted-foreground whitespace-pre-line leading-relaxed">
-              <strong>Prompt:</strong> {prefill.prompt || "No prompt available for this business."}
-            </p>
-          </CardContent>
-        </Card>
-
-        <ModeToggle selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+      <main className="container mx-auto px-4 md:px-6 py-16">
+        <div className="mb-10">
+          <Button
+            variant="ghost"
+            onClick={() => navigate("/prompts")}
+            className="hover:bg-gray-800/60 hover:scale-105 transition-all flex items-center gap-2 text-zinc-300 hover:text-white"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Prompts
+          </Button>
+        </div>
+        <div className="flex justify-center">
+          <Card
+            className="mb-10 w-full max-w-2xl 
+              rounded-2xl border bg-gray-800
+            hover:border-gray-600 transition-all"
+          >
+            <CardContent className="p-6 space-y-3 text-left">
+              <h2 className="text-xl font-semibold text-gray-300">
+                Business Type:{" "}
+                <span className="text-white">{prefill.business_type}</span>
+              </h2>
+              <p className="text-sm text-zinc-400 whitespace-pre-line leading-relaxed">
+                <strong className="text-gray-300">Prompt:</strong>{" "}
+                {prefill.prompt || "No prompt available for this business."}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+        <div className="flex justify-center mb-10">
+          <ModeToggle selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div
-            className={`transition-all duration-300 ${
+            className={`transition-all duration-500 transform ${
               selectedMode === "single"
                 ? "opacity-100 scale-100"
                 : "opacity-40 scale-95 pointer-events-none"
@@ -63,7 +71,7 @@ const Call = () => {
             <CallForm businessType={prefill.business_type} prefill={prefill} />
           </div>
           <div
-            className={`transition-all duration-300 ${
+            className={`transition-all duration-500 transform ${
               selectedMode === "bulk"
                 ? "opacity-100 scale-100"
                 : "opacity-40 scale-95 pointer-events-none"

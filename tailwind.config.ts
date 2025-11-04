@@ -48,8 +48,8 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         brandPurple: {
-          DEFAULT: "#7C3AED",
-          600: "#6D28D9",
+          DEFAULT: "#2563EB",
+          600: "#1D4ED8",
         },
         brandTeal: {
           DEFAULT: "#14B8A6",

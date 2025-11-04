@@ -1,129 +1,134 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthLayout } from '@/components/auth/AuthLayout';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useAuth } from '@/contexts/useAuth';
-import { toast } from 'sonner';
-import { Spinner } from '@/components/Spinner';
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/useAuth";
+import { toast } from "sonner";
+import { Spinner } from "@/components/Spinner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const SignUp = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { signup, token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) {
-      navigate('/dashboard', { replace: true });
-    }
+    if (token) navigate("/dashboard", { replace: true });
   }, [token, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!name || !email || !password) {
-      toast.error('Please fill in all fields');
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast.error('Please enter a valid email address');
-      return;
-    }
-
-    if (password.length < 8) {
-      toast.error('Password must be at least 8 characters');
-      return;
-    }
+    if (!name || !email || !password) return toast.error("Please fill all fields");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return toast.error("Invalid email");
+    if (password.length < 8) return toast.error("Password must be at least 8 characters");
 
     setIsLoading(true);
-
     try {
       await signup(name, email, password);
-      toast.success('Account created successfully!');
-      navigate('/dashboard');
-    } catch (error) {
-      toast.error('Failed to create account. Please try again.');
+      toast.success("Account created successfully!");
+      navigate("/dashboard");
+    } catch {
+      toast.error("Failed to create account. Try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <AuthLayout title="Create account" subtitle="Start your journey with CallFlow today.">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2">
-          <Label htmlFor="name">Full Name</Label>
-          <Input
-            id="name"
-            type="text"
-            placeholder="John Doe"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="h-11 bg-background/50 border-white/[0.06] focus:border-primary/50 focus:ring-2 focus:ring-primary/20"
-            disabled={isLoading}
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="h-11 bg-background/50 border-white/[0.06] focus:border-primary/50 focus:ring-2 focus:ring-primary/20"
-            disabled={isLoading}
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="h-11 bg-background/50 border-white/[0.06] focus:border-primary/50 focus:ring-2 focus:ring-primary/20"
-            disabled={isLoading}
-            required
-          />
-          <p className="text-xs text-muted-foreground">Minimum 8 characters</p>
-        </div>
-
-
-        <Button
-          type="submit"
-          className="w-full h-11 text-base font-semibold bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary"
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <>
-              <Spinner size="sm" className="mr-2" />
-              Creating account...
-            </>
-          ) : (
-            'Create account'
-          )}
-        </Button>
-
-        <p className="text-center text-sm text-muted-foreground">
-          Already have an account?{' '}
-          <Link to="/auth/signin" className="text-primary hover:underline font-medium">
-            Sign in
-          </Link>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br bg-gray-900 text-white px-4 relative">
+      <div className="text-center mb-8">
+        <h1 className="text-5xl font-bold mb-2 bg-gradient-to-r text-white bg-clip-text text-transparent">
+          CallFlow
+        </h1>
+        <p className="text-white/60 text-base">
+          Join us today — simplify your calling experience
         </p>
-      </form>
-    </AuthLayout>
+      </div>
+      <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-3xl p-8 hover:border-white/20 transition-all duration-300">
+        <h2 className="text-2xl font-bold mb-6 text-white text-center">
+          Create Account
+        </h2>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-2">
+            <Label htmlFor="name" className="text-white/90 text-sm font-medium">
+              Full Name
+            </Label>
+            <Input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="John Doe"
+              className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:ring-2 focus:ring-gray-500 focus:border-transparent rounded-xl transition-all"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-white/90 text-sm font-medium">
+              Email Address
+            </Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:ring-2 focus:ring-gray-500 focus:border-transparent rounded-xl transition-all"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="password" className="text-white/90 text-sm font-medium">
+              Password
+            </Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:ring-2 focus:ring-gray-500 focus:border-transparent rounded-xl transition-all"
+            />
+            <p className="text-xs text-white/60 mt-1.5">
+              Minimum 8 characters required
+            </p>
+          </div>
+          <Button
+            type="submit"
+            disabled={isLoading}
+           className="w-full h-12 bg-gradient-to-r from-gray-200 to-gray-200 text-gray-900 font-semibold rounded-xl transition-all duration-300 shadow-lg">
+            {isLoading ? (
+              <>
+                <Spinner size="sm" className="mr-2" /> Creating account...
+              </>
+            ) : (
+              "Create Account"
+            )}
+          </Button>
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-white/10"></div>
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="bg-transparent text-white/60">OR</span>
+            </div>
+          </div>
+
+          {/* Link */}
+          <p className="text-center text-sm text-white/70">
+            Already have an account?{" "}
+            <Link
+              to="/auth/signin"
+              className="text-white font-medium hover:text-gray-300 transition-colors underline decoration-gray-400/30 hover:decoration-gray-300"
+            >
+              Sign In
+            </Link>
+          </p>
+        </form>
+      </div>
+    </div>
   );
 };
 
