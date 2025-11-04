@@ -7,7 +7,7 @@ import { BulkCallUploader } from "@/components/bulk-calls/BulkCallUploader/BulkC
 import { useEffect, useState } from "react";
 import ModeToggle from "./ModeToggle";
 import { Card, CardContent } from "@/components/ui/card";
-import { Footer } from "../../pages/footer";
+import { Footer } from "../footer";
 
 const Call = () => {
   const navigate = useNavigate();
