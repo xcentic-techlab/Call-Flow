@@ -16,7 +16,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      <main className="container mx-auto px-0 py-0 space-y-16">
+      <main className="container mx-auto px-0 py-0 space-y-16 pt-24 md:pt-0">
         <div className="relative w-full overflow-hidden">
           <div className="absolute top-0 left-0 w-full z-50">
             <DashboardHeader transparent />
