@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://89.116.121.214", "http://localhost:8000"],
+    origin: ["http://localhost:5173", "http://89.116.121.214", "balanced-renewal-production-e496.up.railway.app"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
