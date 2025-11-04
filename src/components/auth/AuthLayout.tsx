@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { AuthLeftSection } from "./AuthLeftSection";
+// import { AuthLeftSection } from "./AuthLeftSection";
 import { AuthRightSection } from "./AuthRightSection";
 
 interface AuthLayoutProps {
@@ -11,7 +11,7 @@ interface AuthLayoutProps {
 export const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
   return (
     <div className="min-h-screen bg-background flex">
-      <AuthLeftSection />
+      {/* <AuthLeftSection /> */}
       <AuthRightSection title={title} subtitle={subtitle}>
         {children}
       </AuthRightSection>
