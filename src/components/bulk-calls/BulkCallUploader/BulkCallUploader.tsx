@@ -22,8 +22,8 @@ export const BulkCallUploader = ({
   const [phoneNumbers, setPhoneNumbers] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const { token } = useAuth();
-  
-  const API_BASE = import.meta.env.VITE_API_BASE;
+
+  const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE;
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

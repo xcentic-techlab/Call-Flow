@@ -22,7 +22,7 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
   const [isLoading, setIsLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const API_BASE = import.meta.env.VITE_API_BASE;
+  const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
