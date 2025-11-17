@@ -35,7 +35,10 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
     setIsLoading(true);
     try {
       console.log("Sending call request...");
-      const response = await fetch("http://89.116.121.214:8000/call/call", {
+      const formattedNumber = phoneNumber.startsWith("+91")
+        ? phoneNumber
+      : `+91${phoneNumber}`;
+      const response = await fetch("/api/call/call", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +46,7 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
         },
         body: JSON.stringify({
           business_type: businessType,
-          phone_number: phoneNumber,
+          phone_number: formattedNumber,
         }),
       });
 

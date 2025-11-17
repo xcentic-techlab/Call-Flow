@@ -77,7 +77,7 @@ export const BulkCallUploader = ({
       console.log("Payload being sent:", payload);
 
       // ✅ Using env variable here instead of hardcoded localhost
-      const res = await fetch("http://89.116.121.214:8000/call/bulkCall", {
+      const res = await fetch("/api/call/bulkCall", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -5,7 +5,7 @@ import axios from "axios";
 const promptService = {
   getAllPrompts: async () => {
     try {
-      const response = await axios.get("http://89.116.121.214:8000/prompts");
+      const response = await axios.get("/prompts-api/prompts");
       return response.data;
     } catch (error) {
       console.error("Error fetching prompts:", error);
@@ -14,7 +14,7 @@ const promptService = {
   },
   getPromptByBusinessType: async (businessType) => {
     try {
-      const response = await axios.get("http://89.116.121.214:8000/prompts/${businessType}");
+      const response = await axios.get(`/prompts-api/prompts/${businessType}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching prompt:", error);
@@ -23,7 +23,7 @@ const promptService = {
   },
   updatePrompt: async (businessType, prompt) => {
     try {
-      const response = await axios.post("http://89.116.121.214:8000/prompts/update", {
+      const response = await axios.post("/prompts-api/prompts/update", {
         business_type: businessType,
         prompt,
       });

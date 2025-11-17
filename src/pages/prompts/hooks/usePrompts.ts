@@ -9,7 +9,7 @@ export function usePrompts() {
 
   const fetchPrompts = async () => {
     try {
-      const res = await fetch("http://89.116.121.214:8000/prompts");
+      const res = await fetch("prompts-api/prompts");
       const data = await res.json();
       setPrompts(data);
     } catch (error) {
@@ -22,7 +22,7 @@ export function usePrompts() {
 
   const updatePrompt = async (business: string, prompt: string) => {
     try {
-      const res = await fetch("http://89.116.121.214:8000/prompts/update", {
+      const res = await fetch("/prompts-api/prompts/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ business_type: business, prompt }),

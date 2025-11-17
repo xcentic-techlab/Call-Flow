@@ -4,6 +4,7 @@ import axios from "axios";
 import SingleCall from "../models/SingleCall.js";
 import BulkCall from "../models/BulkCall.js";
 import User from "../models/TempUser.js";
+import { getAllPrompts } from "../controllers/promptController.js";
 import { callPhoneNumber } from "../utils/callService.js";
 import Prompt from "../models/Prompt.js";
 
@@ -133,5 +134,7 @@ router.post("/bulkCall", protect, async (req, res) => {
     });
   }
 });
+
+router.get("/", getAllPrompts);
 
 export default router;

@@ -1,7 +1,7 @@
 // const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE?.replace(/\/$/, "");
 
 export async function getPrompts(token: string) {
-  const res = await fetch("http://89.116.121.214:8000/prompts", {
+  const res = await fetch("/prompts-api/prompts", {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!res.ok) throw new Error("Failed to fetch prompts");
@@ -9,7 +9,7 @@ export async function getPrompts(token: string) {
 }
 
 export async function updatePrompt(payload: any, token: string) {
-  const res = await fetch("http://89.116.121.214:8000/prompts", {
+  const res = await fetch("/prompts-api/prompts", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

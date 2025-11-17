@@ -7,7 +7,7 @@ import { DashboardHeader } from "@/components/DashboardHeader";
 import { usePrompts } from "./hooks/usePrompts";
 import { PromptsGrid } from "./components/PromptsGrid";
 import { EditPromptDialog } from "./components/EditPromptDialog";
-import { Footer } from "../footer";
+import { Footer } from "../Footer";
 
 export default function PromptsPage() {
   const navigate = useNavigate();
