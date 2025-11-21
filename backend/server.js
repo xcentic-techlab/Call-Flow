@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 connectDB();
 
 app.get("/", (req, res) => {
-  res.send("🚀 Backend is live on Railway!");
+  res.send("Backend is live.!");
 });
 
 // ✅ Routes
