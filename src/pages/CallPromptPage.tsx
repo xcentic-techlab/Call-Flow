@@ -3,28 +3,28 @@ import { useParams } from "react-router-dom";
 import CallForm from "@/pages/call/CallForm";
 import { BulkCallUploader } from "@/components/bulk-calls/BulkCallUploader/BulkCallUploader";
 import { Spinner } from "@/components/Spinner";
+import { API } from "@/lib/api";
 
 export default function CallPromptPage() {
   const { businessType } = useParams();
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE?.replace(/\/$/, "");
-
   useEffect(() => {
     const fetchPrompt = async () => {
       try {
-        const res = await fetch(`${API_BASE}/prompts`);
-        const data = await res.json();
+        const { data } = await API.get("/prompts");
         setPrompt(data[businessType as string] || "No prompt found.");
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error("Error fetching prompt:", error);
       } finally {
         setLoading(false);
       }
     };
+
     fetchPrompt();
   }, [businessType]);
+
 
   if (loading)
     return (
