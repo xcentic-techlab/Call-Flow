@@ -14,7 +14,8 @@ export default function CallPromptPage() {
   useEffect(() => {
     const fetchPrompt = async () => {
       try {
-        const res = await fetch("/prompts-api/prompts");
+        // const res = await fetch("/prompts-api/prompts");
+        const res = await fetch("https://api.aureya.in/prompts");
         const data = await res.json();
         setPrompt(data[businessType as string] || "No prompt found.");
       } catch (err) {
