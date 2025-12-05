@@ -9,7 +9,7 @@ export async function getPrompts(token: string) {
 }
 
 export async function updatePrompt(payload: any, token: string) {
-  const res = await fetch("/prompts-api/prompts", {
+  const res = await fetch(`${API_BASE}/prompts`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

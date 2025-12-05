@@ -23,7 +23,8 @@ export const BulkCallUploader = ({
   const [loading, setLoading] = useState(false);
   const { token } = useAuth();
 
-  const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE;
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -77,7 +78,7 @@ export const BulkCallUploader = ({
       console.log("Payload being sent:", payload);
 
       // ✅ Using env variable here instead of hardcoded localhost
-      const res = await fetch("/api/call/bulkCall", {
+      const res = await fetch(`${API_BASE}/call/bulkCall`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

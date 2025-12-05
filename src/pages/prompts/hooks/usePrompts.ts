@@ -24,7 +24,7 @@ export function usePrompts() {
 
   const updatePrompt = async (business: string, prompt: string) => {
     try {
-      const res = await fetch("/prompts-api/prompts/update", {
+      const res = await fetch(`${API_BASE}/prompts/update`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ business_type: business, prompt }),

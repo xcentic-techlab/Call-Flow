@@ -22,7 +22,8 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
   const [isLoading, setIsLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  // const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE;
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +39,7 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
       const formattedNumber = phoneNumber.startsWith("+91")
         ? phoneNumber
       : `+91${phoneNumber}`;
-      const response = await fetch("/api/call/call", {
+      const response = await fetch(`${API_BASE}/call/call`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
