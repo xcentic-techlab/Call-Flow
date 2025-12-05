@@ -6,19 +6,19 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      // 1️⃣ Local backend for call-related APIs
+      // Calls API backend
       "/api": {
         target: "https://call-flow-l08x.onrender.com",
         changeOrigin: true,
         secure: false,
       },
 
-      // 2️⃣ Remote backend for prompts
+      // Prompts API backend
       "/prompts-api": {
         target: "https://api.aureya.in",
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/prompts-api/, ""),
+        rewrite: (p) => p.replace(/^\/prompts-api/, ""),
       },
     },
   },
