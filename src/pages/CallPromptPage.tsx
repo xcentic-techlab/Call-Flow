@@ -23,6 +23,8 @@ useEffect(() => {
       setLoading(false);
     }
   };
+  console.log("Hitting:", `${API_BASE}/prompts`);
+
 
   fetchPrompt();
 }, [businessType]);
