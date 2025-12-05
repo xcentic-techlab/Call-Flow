@@ -15,11 +15,12 @@ export default defineConfig({
 
       // 2️⃣ Remote backend for prompts
       "/prompts-api": {
-        target: "https://api.aureya.in",
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/prompts-api/, ""),
-      },
+          target: "https://api.aureya.in",
+          changeOrigin: true,
+          secure: false,
+          rewrite: (p) => p.replace(/^\/prompts-api/, "/api/prompts"),
+        },
+
     },
   },
   resolve: {
