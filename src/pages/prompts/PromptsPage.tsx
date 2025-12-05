@@ -12,6 +12,8 @@ import { Footer } from "../Footer";
 export default function PromptsPage() {
   const navigate = useNavigate();
   const { prompts, loading, updatePrompt } = usePrompts();
+  // console.log("PROMPTS LOADED:", prompts);
+
   const [selectedBusiness, setSelectedBusiness] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -20,11 +22,15 @@ export default function PromptsPage() {
     setOpen(true);
   };
 
-  const handleMakeCall = (business: string) => {
-    navigate("/call", {
-      state: { business_type: business, prompt: prompts[business], mode: "single" },
-    });
-  };
+const handleMakeCall = (business: string) => {
+  navigate("/call", {
+    state: {
+      business_type: business,
+      prompt: prompts[business],
+      mode: "single",
+    },
+  });
+};
 
   if (loading)
     return (
@@ -32,6 +38,10 @@ export default function PromptsPage() {
       <Spinner size="lg" />
     </div>
     );
+    if (!loading) {
+  // console.log("PROMPTS FETCHED SUCCESSFULLY:", prompts);
+}
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br bg-gray-900 text-white flex flex-col">

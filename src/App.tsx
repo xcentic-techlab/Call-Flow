@@ -56,14 +56,16 @@ const App = () => (
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/:businessType/call"
-              element={
-                <ProtectedRoute>
-                  <CallPromptPage />
-                </ProtectedRoute>
-              }
-            />
+<Route
+  path="/call/:businessType"
+  element={
+    <ProtectedRoute>
+      <CallPromptPage />
+    </ProtectedRoute>
+  }
+/>
+
+
 
             <Route path="*" element={<NotFound />} />
           </Routes>

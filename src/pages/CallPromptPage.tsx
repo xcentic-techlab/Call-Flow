@@ -4,18 +4,26 @@ import CallForm from "@/pages/call/CallForm";
 import { BulkCallUploader } from "@/components/bulk-calls/BulkCallUploader/BulkCallUploader";
 import { Spinner } from "@/components/Spinner";
 
+
 export default function CallPromptPage() {
   const { businessType } = useParams();
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(true);
 
+// console.log("BUSINESS TYPE:", businessType);
+
+
 
 const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE?.replace(/\/$/, "");
+
+// console.log("ENV VALUE:", API_BASE);
+// console.log("FETCHING URL SHOULD BE:", `${API_BASE}/prompts`);
+
 
 useEffect(() => {
   const fetchPrompt = async () => {
     try {
-      console.log("ENV VALUE:", API_BASE);
+      // console.log("ENV VALUE:", API_BASE);
 
       const res = await fetch(`${API_BASE}/prompts`);
       if (!res.ok) throw new Error("Failed to fetch prompts.");

@@ -5,12 +5,14 @@ export function usePrompts() {
   const [prompts, setPrompts] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
 
-  // const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE?.replace(/\/$/, "");
+  const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE?.replace(/\/$/, "");
+// console.log("Fetching prompts from:", import.meta.env.VITE_PROMPTS_API_BASE);
 
   const fetchPrompts = async () => {
     try {
-      const res = await fetch("prompts-api/prompts");
+      const res = await fetch(`${API_BASE}/prompts`);
       const data = await res.json();
+      console.log("API RAW RESPONSE:", res);
       setPrompts(data);
     } catch (error) {
       console.error("❌ Error fetching prompts:", error);
