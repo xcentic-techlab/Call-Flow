@@ -9,25 +9,37 @@ export default function CallPromptPage() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(true);
 
-const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE;
+  useEffect(() => {
+    const fetchPrompt = async () => {
+      try {
+        // ✅ Use the proxy endpoint instead of direct API call
+        const res = await fetch("/prompts-api/prompts");
+        
+        // Check if response is ok
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        
+        // Check content type
+        const contentType = res.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          const text = await res.text();
+          console.error('Received non-JSON response:', text);
+          throw new Error('Server returned non-JSON response');
+        }
+        
+        const data = await res.json();
+        setPrompt(data[businessType] || "No prompt found.");
+      } catch (err) {
+        console.error("Error fetching prompts:", err);
+        setPrompt("Failed to load prompt. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-useEffect(() => {
-  const fetchPrompt = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/prompts`);
-      const data = await res.json();
-      setPrompt(data[businessType as string] || "No prompt found.");
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-  console.log("Hitting:", `${API_BASE}/prompts`);
-
-
-  fetchPrompt();
-}, [businessType]);
+    fetchPrompt();
+  }, [businessType]);
 
   if (loading)
     return (
