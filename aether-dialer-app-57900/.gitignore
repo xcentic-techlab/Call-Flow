@@ -1,0 +1,35 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# Production build
+dist/
+build/
+
+.env
+*.zip
+
+
+# Local env files
+.env
+.env.local
+.env.development
+.env.production
+
+# Editor directories and files
+.vscode/
+.DS_Store
+
+# Cache
+*.cache
+.cache/
+vite.cache/
+
+# Output
+*.local
