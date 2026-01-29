@@ -15,7 +15,7 @@ export function usePrompts() {
       console.log("API RAW RESPONSE:", res);
       setPrompts(data);
     } catch (error) {
-      console.error("❌ Error fetching prompts:", error);
+      console.error("Error fetching prompts:", error);
       toast.error("Failed to load prompts");
     } finally {
       setLoading(false);
@@ -35,7 +35,7 @@ export function usePrompts() {
       await fetchPrompts();
       toast.success("Prompt updated successfully!");
     } catch (error) {
-      console.error("❌ Error updating prompt:", error);
+      console.error("Error updating prompt:", error);
       toast.error("Error updating prompt");
     }
   };

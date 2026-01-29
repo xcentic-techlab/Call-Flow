@@ -22,12 +22,12 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
   const [isLoading, setIsLoading] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const API_BASE = import.meta.env.VITE_API_BASE;
+  const API_BASE = import.meta.env.VITE_PROMPTS_API_BASE;
 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("handleSubmit triggered");
+    // console.log("handleSubmit triggered");
 
     if (!token) return toast.error("Please login first!");
     if (!businessType.trim()) return toast.error("Select a business type!");
@@ -39,7 +39,7 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
       const formattedNumber = phoneNumber.startsWith("+91")
         ? phoneNumber
       : `+91${phoneNumber}`;
-      const response = await fetch(`${API_BASE}/call/call`, {
+      const response = await fetch(`${API_BASE}/single-call`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,9 +51,9 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
         }),
       });
 
-      console.log("Response received", response.status);
+      // console.log("Response received", response.status);
       const data = await response.json();
-      console.log("Response data:", data);
+      // console.log("Response data:", data);
 
       if (!response.ok) throw new Error(data.message || "Call failed");
 

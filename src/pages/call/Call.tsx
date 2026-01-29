@@ -80,7 +80,7 @@ const Call = () => {
                 : "opacity-40 scale-95 pointer-events-none"
             }`}
           >
-            <BulkCallUploader businessType={prefill.business_type} prefill={prefill} />
+            <BulkCallUploader businessType={prefill.business_type} />
           </div>
         </div>
       </main>

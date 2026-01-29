@@ -31,7 +31,7 @@ useEffect(() => {
       const data = await res.json();
       setPrompt(data[businessType] || "No prompt found.");
     } catch (err) {
-      console.error("❌ Error fetching prompts:", err);
+      console.error("Error fetching prompts:", err);
     } finally {
       setLoading(false);
     }
@@ -62,7 +62,8 @@ useEffect(() => {
 
       <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
         <CallForm businessType={businessType} prefill={{ prompt }} />
-        <BulkCallUploader businessType={businessType} prefill={{ prompt }} />
+       <BulkCallUploader businessType={businessType} />
+
       </div>
     </div>
   );
