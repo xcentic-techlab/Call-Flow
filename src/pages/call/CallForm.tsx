@@ -39,7 +39,7 @@ export default function CallForm({ prefill = {}, businessType = "" }: CallFormPr
       const formattedNumber = phoneNumber.startsWith("+91")
         ? phoneNumber
       : `+91${phoneNumber}`;
-      const response = await fetch(`${API_BASE}/single-call`, {
+      const response = await fetch(`${API_BASE}/call`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
