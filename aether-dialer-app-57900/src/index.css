@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Neutral Gray Design System - Clean, Professional, and Balanced */
+
+@layer base {
+  :root {
+    /* Backgrounds & Text */
+    --background: 220 15% 10%; /* Dark gray background */
+    --foreground: 210 20% 96%; /* Almost white text */
+
+    /* Cards & Popovers */
+    --card: 220 14% 15%;
+    --card-foreground: 210 20% 96%;
+    --popover: 220 14% 15%;
+    --popover-foreground: 210 20% 96%;
+
+    /* Primary (Neutral Gray) */
+    --primary: 220 10% 45%; /* Medium gray tone */
+    --primary-foreground: 210 20% 98%;
+
+    /* Secondary (Slightly lighter neutral) */
+    --secondary: 220 10% 35%;
+    --secondary-foreground: 210 20% 96%;
+
+    /* Muted tones (for borders, text) */
+    --muted: 220 12% 20%;
+    --muted-foreground: 220 10% 65%;
+
+    /* Accent - subtle neutral highlight */
+    --accent: 220 10% 55%;
+    --accent-foreground: 210 20% 98%;
+
+    /* Destructive - soft red for warnings/errors */
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 210 20% 98%;
+
+    /* Borders & Inputs */
+    --border: 220 10% 25%;
+    --input: 220 10% 25%;
+    --ring: 220 10% 60%; /* Subtle gray ring */
+
+    /* Radius & Surface */
+    --radius: 0.75rem;
+    --surface: 220 14% 15%;
+    --glass: 0 0% 100% / 0.04;
+    --glass-border: 0 0% 100% / 0.08;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}

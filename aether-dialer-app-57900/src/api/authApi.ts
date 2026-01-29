@@ -1,0 +1,27 @@
+const API_BASE = import.meta.env.VITE_API_BASE;
+
+export const authApi = {
+  async signup(name: string, email: string, password: string) {
+    const res = await fetch(`/api/auth/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Signup failed");
+    return data;
+  },
+
+  async signin(email: string, password: string) {
+    const res = await fetch(`/api/auth/signin`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Signin failed");
+    return data;
+  },
+};
