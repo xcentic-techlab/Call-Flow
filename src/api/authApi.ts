@@ -3,7 +3,7 @@ const API_BASE = import.meta.env.VITE_API_BASE;
 export const authApi = {
   async signup(name: string, email: string, password: string) {
     console.log("API_BASE =", API_BASE); // 👈 Add this for debugging
-    const res = await fetch(`${API_BASE}/api/auth/signup`, {
+    const res = await fetch(`/api/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
@@ -15,7 +15,7 @@ export const authApi = {
   },
 
   async signin(email: string, password: string) {
-    const res = await fetch(`${API_BASE}/api/auth/signin`, {
+    const res = await fetch(`/api/auth/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
