@@ -11,6 +11,9 @@ node_modules/
 # Production build
 dist/
 build/
+backend/.env
+# Ignore zip files
+*.zip
 
 # Local env files
 .env
